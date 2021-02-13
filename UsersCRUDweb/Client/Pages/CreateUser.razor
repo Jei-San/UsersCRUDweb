@@ -1,0 +1,18 @@
+﻿@page "/userlist/createuser"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h2>Create A User!</h2>
+
+<UserForm ButtonText="Edit User" User="@user"
+          OnValidSubmit="@AddUser"/>
+
+@code {
+    TblUser user = new TblUser();
+
+    private async Task AddUser()
+    {
+        await Http.PostAsJsonAsync("User/AddUsers", user);
+        NavigationManager.NavigateTo("/userlist");
+    }
+}

@@ -1,0 +1,26 @@
+﻿<EditForm Model="@User" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-field">
+        <label>First Name:</label>
+        <div>
+            <InputText @bind-Value="@User.FirstName" />
+            <ValidationMessage For="@(() => User.FirstName)" />
+        </div>
+    </div>
+    <br />
+    <div class="form-field">
+        <label>Last Name:</label>
+        <div>
+            <InputText @bind-Value="@User.LastName" />
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">
+        @ButtonText
+    </button>
+</EditForm>
+@code {
+    [Parameter] public TblUser User { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save User";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

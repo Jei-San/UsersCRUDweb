@@ -1,0 +1,18 @@
+﻿@page "/userlist/edituser/{userId:int}"
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h2>Edit User</h2>
+<UserForm ButtonText="Edit User" User="@user"
+          OnValidSubmit="@PutUser" />
+@code {
+    [Parameter] public int userId { get; set; }
+    TblUser user = new TblUser();
+
+    private async Task PutUser()
+    {
+        user.UserId = userId;
+        await Http.PutAsJsonAsync("User/EditUsers", user);
+        NavigationManager.NavigateTo("/userlist");
+    }
+}
